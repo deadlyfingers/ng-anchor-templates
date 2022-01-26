@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ng-anchors": {
+    "ng-anchor-templates": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -20,7 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ng-anchors",
+            "outputPath": "dist/ng-anchor-templates",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -72,10 +72,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "ng-anchors:build:production"
+              "browserTarget": "ng-anchor-templates:build:production"
             },
             "development": {
-              "browserTarget": "ng-anchors:build:development"
+              "browserTarget": "ng-anchor-templates:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -83,7 +83,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ng-anchors:build"
+            "browserTarget": "ng-anchor-templates:build"
           }
         },
         "test": {
@@ -103,9 +103,21 @@
             ],
             "scripts": []
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
   },
-  "defaultProject": "ng-anchors"
+  "defaultProject": "ng-anchor-templates",
+  "cli": {
+    "defaultCollection": "@angular-eslint/schematics"
+  }
 }
