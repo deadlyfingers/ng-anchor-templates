@@ -1,4 +1,4 @@
-# [Anchor Template Generator Angular demo](https://deadlyfingers.github.io/ng-anchor-templates/) ![CI](https://github.com/deadlyfingers/ng-anchor-template/workflows/CI/badge.svg)
+# [Anchor Template Generator Angular demo](https://deadlyfingers.github.io/ng-anchor-templates/) ![CI](https://github.com/deadlyfingers/ng-anchor-templates/workflows/CI/badge.svg)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.2.
 
