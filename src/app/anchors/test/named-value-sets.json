@@ -1,0 +1,7 @@
+{
+  "colors": ["brown", "ginger", "red"],
+  "dogs": ["sleeping hound", "idle mutt", "poor mongrel"],
+  "places": ["belfast", "london"],
+  "regions": ["n. ireland", "england"],
+  "times": ["night", "midnight", "twilight"]
+}

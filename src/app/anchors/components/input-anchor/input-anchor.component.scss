@@ -1,0 +1,18 @@
+:host {
+  input {
+    padding: 1em;
+    box-sizing: border-box;
+    font-size: medium;
+  }
+  input[type=text] {
+    width: 85%;
+  }
+  input[type=submit] {
+    width: 15%;
+  }
+  label {
+    display: block;
+    color: gray;
+    font-size: small;
+  }
+}

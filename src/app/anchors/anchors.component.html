@@ -1,0 +1,38 @@
+<ng-container *ngIf="anchors$ | async"></ng-container>
+
+<div class="container" fxLayout="row" fxLayout.lt-sm="column" fxFlexFill>
+
+  <ng-container *ngIf="namedValueSets$ | async as namedValueSets">
+    <main fxFlex="1 6 70%">
+      <h1>Anchor template generator demo <span class="version">v{{version}}</span></h1>
+      <ul class="description">
+        <li>Named sets are single values wrapped in <code>&#x7B;&#x7D;</code></li>
+        <li>Unnamed sets can contain multiple values and are wrapped in <code>[]</code> and delimited by <code>,</code></li>
+        <li>Unnamed sets can also include named sets</li>
+      </ul>
+
+      <!-- anchor user input -->
+      <app-input-anchor (anchor)="updateAnchor($event)" [placeholder]="placeholder" ></app-input-anchor>
+
+      <!-- generated previews -->
+      <app-preview-anchors [anchors]="anchors$ | async"></app-preview-anchors>
+
+    </main>
+
+    <aside fxFlex="1 6 30%" >
+      <h2>Named value sets</h2>
+      <ul>
+        <ng-container *ngFor="let nvs of namedValueSets | keyvalue">
+          <li>{{nvs.key}}
+            <ul>
+              <ng-container *ngFor="let value of nvs.value">
+                <li>{{value}}</li>
+              </ng-container>
+            </ul>
+          </li>
+        </ng-container>
+      </ul>
+    </aside>
+  </ng-container>
+
+</div>

@@ -1,0 +1,7 @@
+<div>
+  <form name="anchor_template">
+    <label for="anchor">Enter Anchor</label>
+    <input name="anchor" type="text" [(ngModel)]="value" (change)="update($event)" [placeholder]="placeholder" pattern="[^\$\@]+" autofocus />
+    <input type="submit" value="Add" />
+  </form>
+</div>

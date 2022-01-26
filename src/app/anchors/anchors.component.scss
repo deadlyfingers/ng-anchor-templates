@@ -1,0 +1,14 @@
+:host {
+  .description {
+    color: grey;
+    font-size: small;
+  }
+
+  aside {
+    ul > li > ul {
+      color: grey;
+      font-size: small;
+      list-style-type: disc;
+    }
+  }
+}
