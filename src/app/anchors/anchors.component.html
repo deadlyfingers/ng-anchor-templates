@@ -1,14 +1,18 @@
-<ng-container *ngIf="anchors$ | async"></ng-container>
-
 <div class="container" fxLayout="row" fxLayout.lt-sm="column" fxFlexFill>
 
   <ng-container *ngIf="namedValueSets$ | async as namedValueSets">
     <main fxFlex="1 6 70%">
       <h1>Anchor template generator demo <span class="version">v{{version}}</span></h1>
       <ul class="description">
-        <li>Named sets are single values wrapped in <code>&#x7B;&#x7D;</code></li>
-        <li>Unnamed sets can contain multiple values and are wrapped in <code>[]</code> and delimited by <code>,</code></li>
-        <li>Unnamed sets can also include named sets</li>
+        <li>Named sets are single values wrapped in <code>&#x7B;&#x7D;</code>
+          <ul><li>eg. <code>&#x7B;colors&#x7D;</code></li></ul>
+        </li>
+        <li>Unnamed sets can contain multiple values and are wrapped in <code>[]</code> and delimited by <code>,</code>
+          <ul><li>eg. <code>[uk, united kingdom]</code></li></ul>
+        </li>
+        <li>Unnamed sets can also include named sets
+          <ul><li>eg. <code>[uk, united kingdom, &#x7B;regions&#x7D;]</code></li></ul>
+        </li>
       </ul>
 
       <!-- anchor user input -->

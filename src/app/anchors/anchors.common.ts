@@ -34,7 +34,7 @@ export class Anchors {
     return matches.map(m => m.substring(1).split(',').map(x => {const v = x.trim().replace(/\]$/, ''); return v.indexOf('{') === 0 ? Anchors.getNestedNamedValueSet(v, namedValueSetDict) : v.trim() }).flat());
   }
 
-  // => The quick @$ jumped over the $ towards $ at @
+  // generates a template with placeholders for named and unnamed value sets -> The quick @ $ jumped over the $ towards $ at @
   static generateAnchorMasterTemplate = (anchor: string, namedTemplateSlotChar: string, unnamedTemplateSlotChar: string): string => {
     let template = anchor;
     template = template.replace(Anchors.REGEX_UNNAMED, unnamedTemplateSlotChar);

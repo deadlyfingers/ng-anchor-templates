@@ -22,10 +22,16 @@ the quick {colors} [fox, foxes] jumped over the [lazy dog, {dogs}]
 
 ![anchors preview](https://repository-images.githubusercontent.com/452270926/c924031b-7f43-4c01-ad45-25e9d0163da0)
 
-## Named Value Sets
+### Named Value Sets
 
 Currently named value sets are provided from a static [json file](https://github.com/deadlyfingers/ng-anchor-templates/blob/main/src/app/anchors/test/named-value-sets.json).
+
 ## Angular Development
+Requires [Node.js](https://nodejs.org/) and [Angular CLI](https://github.com/angular/angular-cli) version 12.0.2 or later installed.
+
+### Setup ###
+Run `npm install` to install node modules.
+
 ### Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
