@@ -2,22 +2,22 @@ import { IValueSet, INamedValueSetDict } from "./anchors.types";
 
 export class Anchors {
 
-  static readonly REGEX_NAMED = /\{([a-z0-9\s]+)\}[^,\]]/mig ;
+  static readonly REGEX_NAMED = /(?<!\[)\{([a-z0-9\s]+)\}(?!\s?,?\s?[a-z0-9_\{\}\s]*\])/mig ;
 
   static readonly REGEX_UNNAMED = /\[([a-z0-9\s,\{\}]+[^\]])\]/mig ;
 
   static getNamedValueSet = (key: string, namedValueSetDict: INamedValueSetDict): IValueSet => {
-    if (!namedValueSetDict[key]) {
-      console.warn('named value set not found for key:', key);
+    const nameKey = key.replace(/\}$/, '');
+    if (!namedValueSetDict[nameKey]) {
+      console.warn('named value set not found for key:', nameKey);
       return [];
     }
-    return namedValueSetDict[key];
+    return namedValueSetDict[nameKey];
   }
 
   static findNamedValueSets = (anchor: string, namedValueSetDict: INamedValueSetDict, regex = Anchors.REGEX_NAMED ): IValueSet[] => {
     if (!anchor || !regex) return [];
-    const str = `${anchor} `; // add space for js regex pattern
-    const matches = str.match(regex);
+    const matches = anchor.match(regex);
     if (!matches) return [];
     return matches.map(m => m.trim().slice(1, -1)).map(key => Anchors.getNamedValueSet(key, namedValueSetDict));
   }
@@ -29,15 +29,14 @@ export class Anchors {
 
   static findValueSets = (anchor: string, namedValueSetDict: INamedValueSetDict, regex = Anchors.REGEX_UNNAMED ): IValueSet[] => {
     if (!anchor || !regex) return [];
-    const str = `${anchor} `; // add space for js regex pattern
-    const matches = str.match(regex);
+    const matches = anchor.match(regex);
     if (!matches) return [];
-    return matches.map(m => m.substring(1).split(',').map(x => {const v = x.trim().replace(/]$/, ''); return v.indexOf('{') === 0 ? Anchors.getNestedNamedValueSet(v, namedValueSetDict) : v.trim() }).flat());
+    return matches.map(m => m.substring(1).split(',').map(x => {const v = x.trim().replace(/\]$/, ''); return v.indexOf('{') === 0 ? Anchors.getNestedNamedValueSet(v, namedValueSetDict) : v.trim() }).flat());
   }
 
   // => The quick @$ jumped over the $ towards $ at @
   static generateAnchorMasterTemplate = (anchor: string, namedTemplateSlotChar: string, unnamedTemplateSlotChar: string): string => {
-    let template = `${anchor} `; // add space for regex pattern
+    let template = anchor;
     template = template.replace(Anchors.REGEX_UNNAMED, unnamedTemplateSlotChar);
     template = template.replace(Anchors.REGEX_NAMED, namedTemplateSlotChar);
     return template;
@@ -58,7 +57,7 @@ export class Anchors {
       slotIndex = anchorTemplate.indexOf(templateSlotChar);
       if (slotIndex !== -1) {
         for (const value of valueSet) {
-          filledAnchorTemplate = `${anchorTemplate.substring(0, slotIndex)} ${value} ${anchorTemplate.substring(slotIndex + 1)}`;
+          filledAnchorTemplate = anchorTemplate.substring(0, slotIndex) + value + anchorTemplate.substring(slotIndex + 1);
           anchors.push(filledAnchorTemplate);
         }
       } else {
@@ -73,7 +72,7 @@ export class Anchors {
     return anchors;
   }
 
-  // remove double spacing as result of templating
+  // remove double spacing as result of templating (to be removed)
   static fixSpacing = (anchor: string): string => {
     return anchor.replace(/\s+/g, ' ').trim();
   }
@@ -86,9 +85,7 @@ export class Anchors {
     const template = Anchors.generateAnchorMasterTemplate(anchor, namedTemplateSlotChar, unnamedTemplateSlotChar);
 
     const anchorTemplates = Anchors.generateAnchors([template], valueSets, unnamedTemplateSlotChar);
-    const anchors = Anchors.generateAnchors(anchorTemplates, namedValueSets, namedTemplateSlotChar);
-
-    return anchors.map(a => Anchors.fixSpacing(a));
+    return Anchors.generateAnchors(anchorTemplates, namedValueSets, namedTemplateSlotChar);
   }
 
 }

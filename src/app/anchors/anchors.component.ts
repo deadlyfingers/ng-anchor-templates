@@ -12,7 +12,7 @@ import { AnchorsService } from './anchors.service';
   ]
 })
 export class AnchorsComponent {
-  readonly version = 1;
+  readonly version = 1.1;
 
   anchor = '';
 
