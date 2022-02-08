@@ -2,9 +2,9 @@ import { IValueSet, INamedValueSetDict } from "./anchors.types";
 
 export class Anchors {
 
-  static readonly REGEX_NAMED = /(?<!\[)\{([a-z0-9\s]+)\}(?!\s?,?\s?[a-z0-9_\{\}\s]*\])/mig ;
+  static readonly REGEX_NAMED = /(?<!\[)\{([a-z0-9_\s]+)\}(?!\s?,?\s?[a-z0-9_\{\}\s]*\])/mig ;
 
-  static readonly REGEX_UNNAMED = /\[([a-z0-9\s,\{\}]+[^\]])\]/mig ;
+  static readonly REGEX_UNNAMED = /\[([a-z0-9_\s,\{\}]+[^\]])\]/mig ;
 
   static getNamedValueSet = (key: string, namedValueSetDict: INamedValueSetDict): IValueSet => {
     const nameKey = key.replace(/\}$/, '');
